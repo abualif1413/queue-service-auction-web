@@ -1,9 +1,7 @@
-import { Login } from './user/login';
+import { AppRouter } from './components/pages/_router';
 
 function App() {
-  return (
-    <Login />
-  );
+  return <AppRouter />;
 }
 
 export default App;
