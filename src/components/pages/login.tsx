@@ -9,11 +9,15 @@ import {
 } from '@mui/material';
 import { FC } from 'react';
 import { Link as RouterLink } from 'react-router-dom';
-import { useSubmitHandlerLogin } from '../../hooks';
+import { useSubmitHandlerLogin, useUserAuth } from '../../hooks';
 import { ToastMessage } from '../modals';
 
 export const Login: FC = () => {
   const { formik, toastMessageState } = useSubmitHandlerLogin();
+  const { isLoggedIn, navigateToDashboard } = useUserAuth();
+  if (isLoggedIn) {
+    navigateToDashboard();
+  }
   return (
     <div className='w-full h-screen flex items-center justify-center'>
       <form onSubmit={formik.handleSubmit}>
@@ -57,7 +61,12 @@ export const Login: FC = () => {
           <Button fullWidth variant='contained' type='submit'>
             Log in
           </Button>
-          <FormControlLabel control={<Checkbox />} label='Keep me logged in' />
+          <FormControlLabel
+            control={<Checkbox checked={formik.values.keepLoggedIn} />}
+            label='Keep me logged in'
+            name='keepLoggedIn'
+            onChange={formik.handleChange}
+          />
         </Card>
       </form>
       <ToastMessage

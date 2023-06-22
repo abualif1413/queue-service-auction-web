@@ -7,7 +7,7 @@ import {
   serviceHit,
   validationSchemaUserRegisterNew,
 } from '../../utils';
-import { useModals } from '../use-modals';
+import { useModals } from '../modals';
 
 export const useSubmitHandlerUserRegistration = () => {
   const { confirmationModal, toastMessage } = useModals();
@@ -25,7 +25,7 @@ export const useSubmitHandlerUserRegistration = () => {
         title: 'Register account',
         message: 'By clicking yes button, you are agree to create you account with us',
         onConfirmYesAction: async () => {
-          const response = await serviceHit<AddNewUserRequest, BasicResponse>(
+          const response = await serviceHit<AddNewUserRequest, BasicResponse<any>>(
             HTTP_REQUEST_ENDPOINT.USER_REGISTER_NEW,
             HTTP_REQUEST_METHOD.POST,
             {

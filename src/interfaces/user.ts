@@ -9,8 +9,20 @@ export interface LoginAtempt {
   password: string;
 }
 
-export interface BasicResponse {
+export interface BasicResponse<T> {
   success: boolean;
   message: string;
-  metadata: any;
+  metadata: T;
+}
+
+export interface UserResponseSuccessMetadata {
+  authId: string;
+  email: string;
+  name: string;
+  id: number;
+}
+
+export interface UserResponseFailedMetadata {
+  email: string;
+  password: string;
 }
