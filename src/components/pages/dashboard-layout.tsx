@@ -1,13 +1,22 @@
-import { List, ListItem, ListItemButton, ListItemIcon, ListItemText } from '@mui/material';
+import {
+  List,
+  ListItem,
+  ListItemButton,
+  ListItemIcon,
+  ListItemText,
+  ListSubheader,
+} from '@mui/material';
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
+import CurrencyExchangeIcon from '@mui/icons-material/CurrencyExchange';
 import LabelImportantIcon from '@mui/icons-material/LabelImportant';
 import LogoutIcon from '@mui/icons-material/Logout';
 import PostAddIcon from '@mui/icons-material/PostAdd';
-import { Outlet } from 'react-router-dom';
+import { Link, Outlet } from 'react-router-dom';
 import { ConfirmationModal } from '../modals';
 import { useUserAuth } from '../../hooks';
+import { FC } from 'react';
 
-export const DashboardLayout = () => {
+export const DashboardLayout: FC = () => {
   const { confirmationModal, logout, isLoggedIn, navigateToLogin } = useUserAuth();
   if (!isLoggedIn) {
     navigateToLogin();
@@ -15,14 +24,22 @@ export const DashboardLayout = () => {
   return (
     <div className='flex w-full h-screen'>
       <div className='w-1/4'>
-        <List>
+        <List
+          subheader={
+            <ListSubheader component='div' id='nested-list-subheader'>
+              Nested List Items
+            </ListSubheader>
+          }
+        >
           <ListItem disablePadding>
-            <ListItemButton>
-              <ListItemIcon>
-                <PostAddIcon />
-              </ListItemIcon>
-              <ListItemText primary='My Items' />
-            </ListItemButton>
+            <Link to='/my-items'>
+              <ListItemButton>
+                <ListItemIcon>
+                  <PostAddIcon />
+                </ListItemIcon>
+                <ListItemText>My Items</ListItemText>
+              </ListItemButton>
+            </Link>
           </ListItem>
           <ListItem disablePadding>
             <ListItemButton>
@@ -30,6 +47,14 @@ export const DashboardLayout = () => {
                 <LabelImportantIcon />
               </ListItemIcon>
               <ListItemText primary='My Bids' />
+            </ListItemButton>
+          </ListItem>
+          <ListItem disablePadding>
+            <ListItemButton>
+              <ListItemIcon>
+                <CurrencyExchangeIcon />
+              </ListItemIcon>
+              <ListItemText primary='My Balance' />
             </ListItemButton>
           </ListItem>
           <ListItem disablePadding>
