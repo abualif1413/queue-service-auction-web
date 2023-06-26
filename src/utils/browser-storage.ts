@@ -12,7 +12,7 @@ export const getLocalStorage = <T>(key: string) => {
   const { value } = strValue
     ? (JSON.parse(strValue) as { value: T; expiry: number })
     : { value: null };
-  return value;
+  return value as T;
 };
 
 export const removeLocalStorage = (key: string) => {
@@ -26,7 +26,7 @@ export const setSessionStorage = <T>(key: string, value: T) => {
 export const getSessionStorage = <T>(key: string) => {
   const strValue = sessionStorage.getItem(key);
   const value = strValue ? (JSON.parse(strValue) as T) : null;
-  return value;
+  return value as T;
 };
 
 export const removeSessionStorage = (key: string) => {

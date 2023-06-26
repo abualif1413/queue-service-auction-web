@@ -1,12 +1,6 @@
 import { Alert, Snackbar } from '@mui/material';
 import { FC } from 'react';
-
-export interface ToastMessageProps {
-  open: boolean;
-  severity: 'success' | 'error' | 'warning' | 'info';
-  message: string;
-  onClose?: () => void;
-}
+import { ToastMessageProps } from '../../interfaces';
 
 export const ToastMessage: FC<ToastMessageProps> = ({
   open,

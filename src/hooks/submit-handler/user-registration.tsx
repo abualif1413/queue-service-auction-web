@@ -1,6 +1,5 @@
 import { useFormik } from 'formik';
-import { ConfirmationModalProps } from '../../components/modals';
-import { AddNewUserRequest, BasicResponse } from '../../interfaces';
+import { AddNewUserRequest, BasicResponse, ConfirmationModalProps } from '../../interfaces';
 import {
   HTTP_REQUEST_ENDPOINT,
   HTTP_REQUEST_METHOD,

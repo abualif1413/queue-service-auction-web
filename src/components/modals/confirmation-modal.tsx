@@ -7,14 +7,7 @@ import {
   DialogTitle,
 } from '@mui/material';
 import { FC } from 'react';
-
-export interface ConfirmationModalProps {
-  open: boolean;
-  title: string;
-  message: string;
-  onConfirmYesAction: () => void;
-  onConfirmNoAction?: () => void;
-}
+import { ConfirmationModalProps } from '../../interfaces';
 
 export const ConfirmationModal: FC<ConfirmationModalProps> = ({
   open,

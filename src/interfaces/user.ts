@@ -4,21 +4,13 @@ export interface AddNewUserRequest {
   password: string;
 }
 
-export interface LoginAtempt {
-  email: string;
-  password: string;
-}
+export interface LoginAtempt extends Omit<AddNewUserRequest, 'name'> {}
 
-export interface BasicResponse<T> {
-  success: boolean;
-  message: string;
-  metadata: T;
+export interface User extends AddNewUserRequest {
+  id: number;
 }
-
-export interface UserResponseSuccessMetadata {
+export interface UserResponseSuccessMetadata extends Omit<AddNewUserRequest, 'password'> {
   authId: string;
-  email: string;
-  name: string;
   id: number;
 }
 

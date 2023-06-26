@@ -8,15 +8,20 @@ export const useUserAuth = () => {
   const { confirmationModal } = useModals();
   const navigate = useNavigate();
 
-  const isLoggedIn = useMemo(() => {
+  const userData = useMemo(() => {
     const userInfoFromLS = browserStorage.getLocalStorage<UserResponseSuccessMetadata>(
       APP_KEYS.USER_SESSION
     );
     const userInfoFromSS = browserStorage.getSessionStorage<UserResponseSuccessMetadata>(
       APP_KEYS.USER_SESSION
     );
-    return userInfoFromLS !== null || userInfoFromSS !== null;
+
+    return userInfoFromLS ?? userInfoFromSS;
   }, []);
+
+  const isLoggedIn = useMemo(() => {
+    return userData !== null;
+  }, [userData]);
 
   const logout: React.MouseEventHandler<HTMLLIElement> = () => {
     confirmationModal.setState({
@@ -47,5 +52,6 @@ export const useUserAuth = () => {
     logout,
     navigateToDashboard,
     navigateToLogin,
+    userData,
   };
 };

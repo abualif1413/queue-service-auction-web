@@ -35,17 +35,21 @@ export const useSubmitHandlerLogin = () => {
         password: values.password,
       });
       if (response.success) {
+        const { id, authId, name, email } = response.metadata as UserResponseSuccessMetadata;
+        const responseToStore: UserResponseSuccessMetadata = {
+          id,
+          authId,
+          name,
+          email,
+        };
         if (values.keepLoggedIn) {
           browserStorage.setLocalStorage(
             APP_KEYS.USER_SESSION,
-            response.metadata as UserResponseSuccessMetadata,
+            responseToStore,
             604800000 // Life in 7 days
           );
         } else {
-          browserStorage.setSessionStorage(
-            APP_KEYS.USER_SESSION,
-            response.metadata as UserResponseSuccessMetadata
-          );
+          browserStorage.setSessionStorage(APP_KEYS.USER_SESSION, responseToStore);
         }
         toastMessage.setState({
           open: true,
