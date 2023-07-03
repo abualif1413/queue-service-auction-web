@@ -1,8 +1,12 @@
+import { SvgIconTypeMap } from '@mui/material';
+import { OverridableComponent } from '@mui/material/OverridableComponent';
 import { ColumnDef } from '@tanstack/react-table';
+import { Item } from './items';
 
-export interface LinkNavigationProps {
-  text: string;
-  href?: string;
+export interface BidsModalProps {
+  open: boolean;
+  item: Item;
+  onClose: () => void
 }
 
 export interface BreadcrumbNavigationProps {
@@ -31,6 +35,27 @@ export interface DashboardContextProps {
 export interface DashboardContextProviderProps {
   children: string | JSX.Element | JSX.Element[];
 }
+
+export interface LinkNavigationProps {
+  text: string;
+  href?: string;
+}
+
+interface MenuListItemBaseProps {
+  caption: string;
+  Icon: OverridableComponent<SvgIconTypeMap<{}, "svg">>
+}
+
+type MenuListItemConditionalProps = {
+  linkTo?: string;
+  onClick?: never
+} | {
+  onClick?: React.MouseEventHandler
+  linkTo?: never
+}
+
+
+export type MenuListItemProps = MenuListItemBaseProps & MenuListItemConditionalProps
 
 export interface TableProps<T> {
   columns: ColumnDef<T>[];

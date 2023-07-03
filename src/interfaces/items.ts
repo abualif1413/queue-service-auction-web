@@ -24,3 +24,8 @@ export interface MyItemsResponseSuccessMetadata {
   user: User;
   items: Item[];
 }
+
+export interface BrowseItemsResponseSuccessMetadata {
+  user: User;
+  items: (Item & { user: User })[];
+}

@@ -8,26 +8,18 @@ export enum HTTP_REQUEST_ENDPOINT {
   USER_LOGIN_ATTEMPT = '/user/login-attempt',
   ADD_NEW_ITEM = '/item/new',
   MY_ITEM_LIST = '/item/my-list',
+  BROWSE_LIST = '/item/browse-list',
+  GET_ITEM_DATA = '/item/get-data',
+  PLACE_BID = '/bid/place-new',
+  ALL_BID = '/bid/all-bids',
 }
 
 export const serviceHit = async <T, K>(
-  endpoint: HTTP_REQUEST_ENDPOINT,
+  endpoint: HTTP_REQUEST_ENDPOINT | string,
   method: HTTP_REQUEST_METHOD,
   body?: T,
   headers?: HeadersInit
 ) => {
-  var formData = new FormData();
-
-  if (body) {
-    const keys = Object.keys(body);
-    type ObjectKey = keyof typeof body;
-    keys.forEach((key) => {
-      const myVar = key as ObjectKey;
-      const data = body[myVar] as string;
-      formData.append(key, data);
-    });
-  }
-
   const rawResponse = await fetch(`${process.env.REACT_APP_SERVICE_HOST}${endpoint}`, {
     method: method,
     body: body ? JSON.stringify(body) : undefined,

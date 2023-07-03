@@ -1,7 +1,7 @@
 import { useState } from 'react';
-import { ConfirmationModalProps, ToastMessageProps } from '../interfaces';
+import { ConfirmationModalProps, ToastMessageProps } from '../../interfaces';
 
-export const useModals = () => {
+export const useAlertModals = () => {
   const confirmationModalProps: ConfirmationModalProps = {
     open: false,
     title: '',

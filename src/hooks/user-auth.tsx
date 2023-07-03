@@ -2,10 +2,10 @@ import { useMemo } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { UserResponseSuccessMetadata } from '../interfaces';
 import { APP_KEYS, browserStorage } from '../utils';
-import { useModals } from './modals';
+import { useAlertModals } from './modals';
 
 export const useUserAuth = () => {
-  const { confirmationModal } = useModals();
+  const { confirmationModal } = useAlertModals();
   const navigate = useNavigate();
 
   const userData = useMemo(() => {

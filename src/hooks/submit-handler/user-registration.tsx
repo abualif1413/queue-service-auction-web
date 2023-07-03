@@ -6,10 +6,10 @@ import {
   serviceHit,
   validationSchemaUserRegisterNew,
 } from '../../utils';
-import { useModals } from '../modals';
+import { useAlertModals } from '../modals';
 
 export const useSubmitHandlerUserRegistration = () => {
-  const { confirmationModal, toastMessage } = useModals();
+  const { confirmationModal, toastMessage } = useAlertModals();
   const formik = useFormik({
     initialValues: {
       name: '',

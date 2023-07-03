@@ -11,6 +11,7 @@ import {
 } from '@mui/material';
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import CurrencyExchangeIcon from '@mui/icons-material/CurrencyExchange';
+import FormatListNumberedRtlIcon from '@mui/icons-material/FormatListNumberedRtl';
 import LabelImportantIcon from '@mui/icons-material/LabelImportant';
 import LogoutIcon from '@mui/icons-material/Logout';
 import PostAddIcon from '@mui/icons-material/PostAdd';
@@ -18,7 +19,7 @@ import { Link as RouterLink, Outlet } from 'react-router-dom';
 import { ConfirmationModal } from '../modals';
 import { useUserAuth } from '../../hooks';
 import { FC, useContext } from 'react';
-import { BreadcrumbNavigationProps } from '../../interfaces';
+import { BreadcrumbNavigationProps, MenuListItemProps } from '../../interfaces';
 import { indigo } from '@mui/material/colors';
 import { DashboardContext } from '../context';
 
@@ -44,48 +45,16 @@ export const DashboardLayout: FC = () => {
             },
           }}
         >
-          <ListItem disablePadding>
-            <RouterLink to='/my-items' className='w-full'>
-              <ListItemButton>
-                <ListItemIcon>
-                  <PostAddIcon />
-                </ListItemIcon>
-                <ListItemText>My Items</ListItemText>
-              </ListItemButton>
-            </RouterLink>
-          </ListItem>
-          <ListItem disablePadding>
-            <ListItemButton>
-              <ListItemIcon>
-                <LabelImportantIcon />
-              </ListItemIcon>
-              <ListItemText primary='My Bids' />
-            </ListItemButton>
-          </ListItem>
-          <ListItem disablePadding>
-            <ListItemButton>
-              <ListItemIcon>
-                <CurrencyExchangeIcon />
-              </ListItemIcon>
-              <ListItemText primary='My Balance' />
-            </ListItemButton>
-          </ListItem>
-          <ListItem disablePadding>
-            <ListItemButton>
-              <ListItemIcon>
-                <AccountCircleIcon />
-              </ListItemIcon>
-              <ListItemText primary='Account' />
-            </ListItemButton>
-          </ListItem>
-          <ListItem disablePadding onClick={logout}>
-            <ListItemButton>
-              <ListItemIcon>
-                <LogoutIcon />
-              </ListItemIcon>
-              <ListItemText primary='Logout' />
-            </ListItemButton>
-          </ListItem>
+          <MenuItem linkTo='/my-items' caption='My Items' Icon={PostAddIcon} />
+          <MenuItem
+            linkTo='/browse-items'
+            caption='Browse Items'
+            Icon={FormatListNumberedRtlIcon}
+          />
+          <MenuItem linkTo='/browse-items' caption='My Bids' Icon={LabelImportantIcon} />
+          <MenuItem linkTo='/browse-items' caption='My Balance' Icon={CurrencyExchangeIcon} />
+          <MenuItem linkTo='/browse-items' caption='Account' Icon={AccountCircleIcon} />
+          <MenuItem caption='Logout' Icon={LogoutIcon} onClick={logout} />
         </List>
       </div>
       <div className='grow'>
@@ -110,7 +79,29 @@ export const DashboardLayout: FC = () => {
   );
 };
 
-export const BreadcrumbNavigation: FC<BreadcrumbNavigationProps> = ({ data }) => {
+const MenuItem: FC<MenuListItemProps> = ({ linkTo, caption, Icon, onClick }) => {
+  const item = (
+    <ListItemButton>
+      <ListItemIcon>
+        <Icon />
+      </ListItemIcon>
+      <ListItemText>{caption}</ListItemText>
+    </ListItemButton>
+  );
+  return (
+    <ListItem disablePadding onClick={onClick}>
+      {onClick ? (
+        item
+      ) : (
+        <RouterLink to={linkTo as string} className='w-full'>
+          {item}
+        </RouterLink>
+      )}
+    </ListItem>
+  );
+};
+
+const BreadcrumbNavigation: FC<BreadcrumbNavigationProps> = ({ data }) => {
   const colorLink = indigo[500];
   const colorActive = indigo[200];
   return (

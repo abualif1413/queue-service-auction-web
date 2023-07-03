@@ -16,7 +16,12 @@ export const LocalTable = <T extends object>({ columns, data }: TableProps<T>) =
           {tableInstance.getHeaderGroups().map((headerGroup) => (
             <TableRow key={headerGroup.id}>
               {headerGroup.headers.map((header) => (
-                <TableCell key={header.id} colSpan={header.colSpan}>
+                <TableCell
+                  key={header.id}
+                  colSpan={header.colSpan}
+                  width={header.getSize()}
+                  sx={{ width: header.getSize() !== 150 ? header.getSize() : undefined }}
+                >
                   {header.isPlaceholder
                     ? null
                     : flexRender(header.column.columnDef.header, header.getContext())}
@@ -27,7 +32,7 @@ export const LocalTable = <T extends object>({ columns, data }: TableProps<T>) =
         </TableHead>
         <TableBody>
           {tableInstance.getRowModel().rows.map((row) => (
-            <TableRow key={row.id} className='border-b" bg-white'>
+            <TableRow key={row.id} className='border-b bg-white' hover>
               {row.getVisibleCells().map((cell) => (
                 <TableCell key={cell.id}>
                   {flexRender(cell.column.columnDef.cell, cell.getContext())}

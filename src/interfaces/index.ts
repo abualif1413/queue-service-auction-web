@@ -1,3 +1,4 @@
+export * from './bid';
 export * from './component-props';
 export * from './items';
 export * from './user';

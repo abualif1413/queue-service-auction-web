@@ -6,6 +6,7 @@ import { DashboardLayout } from './dashboard-layout';
 import { MyItems, MyItemsAdd } from './items';
 import { Login } from './login';
 import { RegisterUser } from './register';
+import { BrowseItems } from './items/browse-items';
 
 export const AppRouter: FC = () => {
   return (
@@ -16,6 +17,7 @@ export const AppRouter: FC = () => {
             <Route index element={<Dashboard />} />
             <Route path='/my-items' element={<MyItems />} />
             <Route path='/my-items/add' element={<MyItemsAdd />} />
+            <Route path='/browse-items' element={<BrowseItems />} />
           </Route>
           <Route path='/user' element={<Outlet />}>
             <Route path='login' element={<Login />} />

@@ -13,11 +13,11 @@ import {
   serviceHit,
   validationSchemaLogin,
 } from '../../utils';
-import { useModals } from '../modals';
 import { useUserAuth } from '../user-auth';
+import { useAlertModals } from '../modals';
 
 export const useSubmitHandlerLogin = () => {
-  const { toastMessage } = useModals();
+  const { toastMessage } = useAlertModals();
   const { navigateToDashboard } = useUserAuth();
   const formik = useFormik({
     initialValues: {
