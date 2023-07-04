@@ -9,6 +9,7 @@ import { APP_KEYS, HTTP_REQUEST_ENDPOINT, HTTP_REQUEST_METHOD, serviceHit } from
 import { Button } from '@mui/material';
 import { BidsModal } from '../../modals';
 import { useBidModal } from '../../../hooks/modals/bid-modals';
+import { format } from 'date-fns';
 
 export const BrowseItems = () => {
   const { dashboardTitle, dashboardBreadcrumb } = useContext(DashboardContext);
@@ -46,7 +47,11 @@ export const BrowseItems = () => {
     },
     {
       header: 'Time Window',
-      accessorKey: 'timeWindow',
+      accessorKey: 'item.timeWindow',
+      cell: (value) => {
+        const theDate = new Date(value.row.original.timeWindow);
+        return format(theDate, 'MM/dd/yyyy HH:mm');
+      },
     },
     {
       header: 'Owner',

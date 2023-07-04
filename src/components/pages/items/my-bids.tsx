@@ -1,27 +1,25 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import { useContext, useEffect, useState } from 'react';
 import { DashboardContext } from '../../context';
-import { BasicResponse, Item, MyItemsResponseSuccessMetadata } from '../../../interfaces';
+import { BasicResponse, BidList, MyBidsSuccessResponseMetadata } from '../../../interfaces';
 import { ColumnDef } from '@tanstack/react-table';
 import { LocalTable } from '../../mollecules';
 import { useUserAuth } from '../../../hooks';
 import { APP_KEYS, HTTP_REQUEST_ENDPOINT, HTTP_REQUEST_METHOD, serviceHit } from '../../../utils';
-import { Button } from '@mui/material';
-import { Link } from 'react-router-dom';
 import { format } from 'date-fns';
 
-export const MyItems = () => {
+export const MyBids = () => {
   const { dashboardTitle, dashboardBreadcrumb } = useContext(DashboardContext);
-  const [itemData, setItemData] = useState<Item[]>([]);
+  const [bidData, setBidData] = useState<BidList[]>([]);
   const { userData } = useUserAuth();
 
   useEffect(() => {
-    const breadcrumbData = [{ text: 'Dashboard', href: '/' }, { text: 'My items' }];
+    const breadcrumbData = [{ text: 'Dashboard', href: '/' }, { text: 'My bids' }];
     dashboardBreadcrumb.set(breadcrumbData);
-    dashboardTitle.set('My Items');
+    dashboardTitle.set('My Bids');
 
-    const response = serviceHit<unknown, BasicResponse<MyItemsResponseSuccessMetadata>>(
-      HTTP_REQUEST_ENDPOINT.MY_ITEM_LIST,
+    const response = serviceHit<unknown, BasicResponse<MyBidsSuccessResponseMetadata>>(
+      HTTP_REQUEST_ENDPOINT.MY_BIDS,
       HTTP_REQUEST_METHOD.GET,
       null,
       {
@@ -30,35 +28,40 @@ export const MyItems = () => {
     );
 
     response.then((resp) => {
-      setItemData(resp.metadata.items);
+      setBidData(resp.metadata.bids);
     });
   }, []);
 
-  const columns: ColumnDef<Item>[] = [
+  const columns: ColumnDef<BidList>[] = [
     {
       header: 'Name',
-      accessorKey: 'name',
+      accessorKey: 'item.name',
     },
     {
       header: 'Price',
+      accessorKey: 'item.price',
+    },
+    {
+      header: 'My Price',
       accessorKey: 'price',
     },
     {
       header: 'Time Window',
       accessorKey: 'item.timeWindow',
       cell: (value) => {
-        const theDate = new Date(value.row.original.timeWindow);
+        const theDate = new Date(value.row.original.item.timeWindow);
         return format(theDate, 'MM/dd/yyyy HH:mm');
       },
+    },
+    {
+      header: 'Owner',
+      accessorKey: 'user.name',
     },
   ];
 
   return (
     <>
-      <Link to='/my-items/add'>
-        <Button variant='outlined'>Add new item</Button>
-      </Link>
-      <LocalTable columns={columns} data={itemData} />
+      <LocalTable columns={columns} data={bidData} />
     </>
   );
 };

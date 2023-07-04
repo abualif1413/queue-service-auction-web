@@ -51,7 +51,7 @@ export const DashboardLayout: FC = () => {
             caption='Browse Items'
             Icon={FormatListNumberedRtlIcon}
           />
-          <MenuItem linkTo='/browse-items' caption='My Bids' Icon={LabelImportantIcon} />
+          <MenuItem linkTo='/my-bids' caption='My Bids' Icon={LabelImportantIcon} />
           <MenuItem linkTo='/browse-items' caption='My Balance' Icon={CurrencyExchangeIcon} />
           <MenuItem linkTo='/browse-items' caption='Account' Icon={AccountCircleIcon} />
           <MenuItem caption='Logout' Icon={LogoutIcon} onClick={logout} />

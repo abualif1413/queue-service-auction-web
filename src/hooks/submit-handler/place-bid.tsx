@@ -40,7 +40,7 @@ export const usePlaceBid = (item: Item) => {
 
   const fetchAllBids = useCallback(async () => {
     const response = await serviceHit<null, BasicResponse<(Bid & { user: User })[]>>(
-      `${HTTP_REQUEST_ENDPOINT.ALL_BID}/${item.id}`,
+      `${HTTP_REQUEST_ENDPOINT.ALL_BIDS}/${item.id}`,
       HTTP_REQUEST_METHOD.GET
     );
     return response.metadata;

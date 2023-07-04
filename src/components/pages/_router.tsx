@@ -7,6 +7,7 @@ import { MyItems, MyItemsAdd } from './items';
 import { Login } from './login';
 import { RegisterUser } from './register';
 import { BrowseItems } from './items/browse-items';
+import { MyBids } from './items/my-bids';
 
 export const AppRouter: FC = () => {
   return (
@@ -18,6 +19,7 @@ export const AppRouter: FC = () => {
             <Route path='/my-items' element={<MyItems />} />
             <Route path='/my-items/add' element={<MyItemsAdd />} />
             <Route path='/browse-items' element={<BrowseItems />} />
+            <Route path='/my-bids' element={<MyBids />} />
           </Route>
           <Route path='/user' element={<Outlet />}>
             <Route path='login' element={<Login />} />

@@ -11,7 +11,8 @@ export enum HTTP_REQUEST_ENDPOINT {
   BROWSE_LIST = '/item/browse-list',
   GET_ITEM_DATA = '/item/get-data',
   PLACE_BID = '/bid/place-new',
-  ALL_BID = '/bid/all-bids',
+  ALL_BIDS = '/bid/all-bids',
+  MY_BIDS = '/bid/my-bids',
 }
 
 export const serviceHit = async <T, K>(
